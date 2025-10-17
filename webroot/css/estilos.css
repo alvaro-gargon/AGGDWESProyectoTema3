@@ -1,0 +1,77 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 3 oct 2025, 10:14:58
+    Author     : alvaro.gargon.4
+*/
+
+*{margin: 0; padding: 0;}
+        
+        body{
+            
+            background-color: beige;
+            height: max-content;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* O 100% si el html también tiene min-height: 100% */
+            margin: 0; /* Elimina márgenes predeterminados */
+        }
+        main{
+            height: max-content;
+            flex:1; /*ocupa el resto del espacio */
+            
+        }
+        p{
+            padding: 10px
+        }
+        header{
+            width: 100%;
+            padding: 20px;
+            background-color: #403F6F;
+            color: beige;
+            text-align: center;
+        }
+        footer{
+            background-color: #403F6F;
+            color: beige;
+            text-align: center;
+            position: relative;
+            bottom: 0px;
+            width: 100%;
+            height: 15%;
+        }
+        .contenedor{
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .proyectos{
+            margin: auto;
+            color: beige;
+            margin: 10px;
+            padding: 10px;
+            background-color: #403F6F;
+            width: 50%;
+            border-radius: 30px
+        }
+        a{
+            color: red;
+            text-decoration: none;
+        }
+        img{
+            height: 50px;width: 50px;
+        }
+        tr{
+            border: 1px solid black;
+        }
+        [required] {
+            
+            background-color: lightgoldenrodyellow;
+        }
+        [disabled]{
+            background-color: lightgray;
+        }
