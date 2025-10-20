@@ -8,17 +8,25 @@
 </head>
 <body>
     <header>
-        <h1>Ejercico 22 Tema 3</h1>
-        <h2>Este formulario te mostrara la respuesta en la misma página</h2>
+        <h1>Ejercico 23 Tema 3</h1>
+        <h2>Este formulario te mostrara la respuesta en la misma página, pero escribelo bien o lo vuelves a rellenar</h2>
     </header>
     <h2>Cuestionario de Opinión</h2>
     <?php
     /*
      * @author: Alvaro Garcia Gonzalez
-     * @since: 19/10/2025
-     * Uso: Formulario que se muestra en la misma página */
+     * @since: 20/10/2025
+     * Uso: Formulario que se muestra en la misma página y te da error si envias algo mal */
     //Formulario que muestra las respuestas en la mism página
-        if(isset($_REQUEST['enviar'])){
+        require_once '../core/231018libreriaValidacion.php';
+        $entradaOK=true; //variable boolean para enviar el formulario
+        //validacion de que comida es correcto y no estta vacio
+        /*if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
+            $entradaOK=false;
+        }*/
+        comprobarAlfabetico();
+        
+        if(isset($_REQUEST['enviar']) && $entradaOK){
             //codigo que se ejecuta cuando envias el formulario
             echo "<p><strong>1. Comida favorita:</strong> " . htmlspecialchars($_REQUEST["comida"]) . "</p>";
             echo "<p><strong>2. Numero de dedos:</strong> " . htmlspecialchars($_REQUEST["dedos"]) . "</p>";
@@ -30,7 +38,7 @@
     <form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" method="post">
         <p>
           <label>1. ¿Cuál es tu comida favorita?</label><br>
-          <input type="text" name="comida">
+          <input class="obligatorio" type="text" name="comida" placeholder="Rugido de tripas ...">
         </p>
 
         <p>

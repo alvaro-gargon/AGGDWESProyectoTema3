@@ -13,6 +13,10 @@
   
 
   <?php
+  /*
+     * @author: Alvaro Garcia Gonzalez
+     * @since: 15/10/2025
+     * Uso: Formulario recibido . */
   // htmlspecialchars sirve para que convertir caracteres especiales como 
       echo "<p><strong>1. Nombre:</strong> " . htmlspecialchars($_REQUEST["nombre"]) . "</p>";
       echo "<p><strong>2. Edad:</strong> " . htmlspecialchars($_REQUEST["edad"]) . "</p>";

@@ -15,22 +15,22 @@
     <form action="tratamiento.php" method="post">
       <p>
         <label>1. ¿Cuál es tu nombre?</label><br>
-        <input type="text" name="nombre" required>
+        <input type="text" id="nombre" name="nombre">
       </p>
 
       <p>
         <label>2. ¿Qué edad tienes?</label><br>
-        <input type="number" name="edad" min="0" required>
+        <input type="number" id="edad" name="edad" min="0">
       </p>
         
       <p>
         <label>3. ¿Cuanto dinero te gustaría tener? Incluyeme los centimos</label><br>
-        <input type="number" name="dinero" min="0" step="0.01">
+        <input type="number" id="dinero" name="dinero" min="0" step="0.01">
       </p>
       
       <p>
         <label>4. ¿Cuál es tu color favorito?</label><br>
-        <select name="color" >
+        <select name="color" id="color">
           <option value="Rojo">Rojo</option>
           <option value="Verde">Verde</option>
           <option value="Azul">Azul</option>
@@ -40,10 +40,10 @@
 
       <p>
         <label>5. ¿Qué tipo de música prefieres?</label><br>
-        <input type="radio" name="musica" value="Pop" required> Pop<br>
-        <input type="radio" name="musica" value="Rock"> Rock<br>
-        <input type="radio" name="musica" value="Clásica"> Clásica<br>
-        <input type="radio" name="musica" value="Reguetón"> Reguetón
+        <input type="radio" id="musica" name="musica" value="Pop"> Pop<br>
+        <input type="radio" id="musica" name="musica" value="Rock"> Rock<br>
+        <input type="radio" id="musica" name="musica" value="Clásica"> Clásica<br>
+        <input type="radio" id="musica" name="musica" value="Reguetón"> Reguetón
       </p>
 
       <p>
@@ -61,7 +61,6 @@
 
       <p>
         <input type="submit" value="Enviar respuestas">
-        <input type="reset" value="Borrar">
       </p>
     </form>
     <footer>

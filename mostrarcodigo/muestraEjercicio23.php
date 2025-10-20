@@ -9,11 +9,11 @@
 <body>
     
     <?php
-        highlight_file("../codigoPHP/ejercicio11.php")
+        highlight_file("../codigoPHP/ejercicio23.php");
     ?>
     <footer>
         <p><a href="../indexProyectoTema3.php">Álvaro García González</a></p>
-        <p>Última actualización <time datetime="2025-10-03">03/10/2025</time></p>
+        <p>Última actualización <time datetime="2025-10-20">20/10/2025</time></p>
     </footer>
 </body>
 </html>
