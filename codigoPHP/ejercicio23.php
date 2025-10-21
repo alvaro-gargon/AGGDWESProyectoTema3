@@ -17,21 +17,44 @@
      * @author: Alvaro Garcia Gonzalez
      * @since: 20/10/2025
      * Uso: Formulario que se muestra en la misma página y te da error si envias algo mal */
-    //Formulario que muestra las respuestas en la mism página
+    //Formulario que muestra las respuestas en la misma página
         require_once '../core/231018libreriaValidacion.php';
         $entradaOK=true; //variable boolean para enviar el formulario
-        //validacion de que comida es correcto y no estta vacio
+        //array donde recojo los mensajes de error de cada campo
+        $aErrores=
+                [
+                    'comida' =>null,
+                    'dedos' =>null,
+                    'peso' =>null
+                    ];
+        $aRespuestas=
+                [
+                    'comida' =>null,
+                    'dedos' =>null,
+                    'peso' =>null
+                    ];
+        //validacion de que comida es correcto y no estta vacio (a mano)
         /*if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
             $entradaOK=false;
         }*/
-        comprobarAlfabetico();
         
-        if(isset($_REQUEST['enviar']) && $entradaOK){
+        //Valido cada campo del formulario 
+        if(isset($_REQUEST['enviar'])){
+            $aErrores['comida']=validacionFormularios::comprobarAlfabetico($_REQUEST['comida'],100,1,1);
+            $aErrores['dedos']=validacionFormularios::comprobarAlfabetico($_REQUEST['dedos'],100,1,1);    
+            $aErrores['peso']=validacionFormularios::comprobarAlfabetico($_REQUEST['peso'],100,1,1);   
+            foreach ($aErrores as $valor){
+                if($valor!=null){
+                    $entradaOK=false;
+                }
+            }
+        }
+        
+        if($entradaOK){
             //codigo que se ejecuta cuando envias el formulario
-            echo "<p><strong>1. Comida favorita:</strong> " . htmlspecialchars($_REQUEST["comida"]) . "</p>";
-            echo "<p><strong>2. Numero de dedos:</strong> " . htmlspecialchars($_REQUEST["dedos"]) . "</p>";
-            echo "<p><strong>3. Peso:</strong> " . htmlspecialchars($_REQUEST["peso"]) . "</p>";
-            echo "<p><strong>4. Color favorito:</strong> " . htmlspecialchars($_REQUEST["color"]) . "</p>";
+            foreach ($aErrores as $clave =>$valor){
+                echo('<h2>'.$clave.'</h2>'.':'.$valor);
+            }
         }else{
             //codigo que se ejecuta antes de enviar el formulario
             echo '
