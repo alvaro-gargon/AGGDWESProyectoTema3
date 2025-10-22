@@ -9,75 +9,88 @@
 <body>
     <header>
         <h1>Ejercico 24 Tema 3</h1>
-        <h2>Este formulario te mostrara la respuesta en la misma página, pero si lo escribes mal te vuelvo a poner lo que tienes bien</h2>
+        <h2>Este formulario te mostrara la respuesta en la misma página, lo que tengas bien escrito te lo dejo</h2>
     </header>
     <h2>Cuestionario de Opinión</h2>
     <?php
     /*
      * @author: Alvaro Garcia Gonzalez
-     * @since: 20/10/2025
-     * Uso: Formulario que se muestra en la misma página y te da error si envias algo mal */
-    //Formulario que muestra las respuestas en la mism página
-        $entradaOK=true;
-        $aRespuestas= [
-            'comida_favorita',
-            'imaginacion',
-            'numero_dedos',
-            'peso',
-            'color'
-        ];
-        if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
-            
+     * @since: 22/10/2025
+     * Uso:Construir un formulario para recoger un cuestionario realizado a una persona y mostrar en la misma página las preguntas 
+     * y las respuestas recogidas; en el caso de que alguna respuesta esté vacía o errónea volverá a salir el formulario con el mensaje correspondiente, 
+     * pero las respuestas que habíamos tecleado correctamente aparecerán en el formulario y no tendremos que volver a teclearlas.
+     */
+        require_once '../core/231018libreriaValidacion.php';
+        $entradaOK=true; //variable boolean para enviar el formulario
+        //array donde recojo los mensajes de error de cada campo
+        $aErrores=
+                [
+                    'comida' =>null,
+                    'dedos' =>null,
+                    'peso' =>null
+                    ];
+        $aRespuestas=
+                [
+                    'comida' =>null,
+                    'dedos' =>null,
+                    'peso' =>null
+                    ];
+        //validacion de que comida es correcto y no esta vacio (a mano)
+        /*if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
             $entradaOK=false;
-        }
-        if(empty($_REQUEST['imaginacion']) || is_numeric($_REQUEST['comida'])){
-            
-            $entradaOK=false;
+        }*/
+        
+        //Valido cada campo del formulario. Recojo los errores o las respuestas si es correcto
+        //Si algun valor es null, el formulario no se recogera y se volvera a mostrar
+        if(isset($_REQUEST['enviar'])){
+            $aErrores['comida']=validacionFormularios::comprobarAlfabetico($_REQUEST['comida'],100,1,1);
+            $aErrores['dedos']=validacionFormularios::comprobarEntero($_REQUEST['dedos'],100,1,0);    
+            $aErrores['peso']=validacionFormularios::comprobarFloat($_REQUEST['peso'],100,1,0);   
+            foreach ($aErrores as $clave => $valor){
+                if($valor!=null){
+                    $entradaOK=false;
+                }else{
+                    if(empty($_REQUEST["$clave"])){
+                        $aRespuestas[$clave]='No se ha rellenado';
+                    }else{
+                        $aRespuestas[$clave]=$_REQUEST["$clave"];
+                    }
+                }
+            }
         }
         
-        if(isset($_REQUEST['enviar']) && $entradaOK){
+        if(isset($_REQUEST['enviar']) && $entradaOK==true){
             //codigo que se ejecuta cuando envias el formulario
-            echo "<p><strong>1. Comida favorita:</strong> " . htmlspecialchars($_REQUEST["comida"]) . "</p>";
-            echo "<p><strong>2. Imaginacion:</strong> " . htmlspecialchars($_REQUEST["imaginacion"]) . "</p>";
-            echo "<p><strong>3. Numero de dedos:</strong> " . htmlspecialchars($_REQUEST["dedos"]) . "</p>";
-            echo "<p><strong>4. Peso deseado:</strong> " . htmlspecialchars($_REQUEST["peso"]) . "</p>";
-            echo "<p><strong>5. Color favorito:</strong> " . htmlspecialchars($_REQUEST["color"]) . "</p>";
+            foreach ($aRespuestas as $clave =>$valor){
+                echo('<h2>'.$clave.':'.$valor.'</h2>');
+            }
         }else{
             //codigo que se ejecuta antes de enviar el formulario
-            echo '
-    <form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" method="post">
+            ?>
+            
+            
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
         <p>
           <label>1. ¿Cuál es tu comida favorita?</label><br>
-          <input class="obligatorio" type="text" name="comida" placeholder="Rugido de tripas ...">
-        </p>
-        
-        <p>
-          <label>2. Escribeme lo primero que se te ocurra</label><br>
-          <input  type="text" id="imaginacion" name="imaginacion" placeholder="Tu mente esta llena de ...">
+          <input class="obligatorio" type="text" name="comida" value="<?php echo (isset($_REQUEST['comida'])?$_REQUEST['comida']:''); ?>" 
+                 placeholder="Rugido de tripas ...">
+          <p class="error"><?php echo($aErrores['comida'])?></p>
         </p>
 
         <p>
-          <label>3. ¿Cuantos dedos tienes?</label><br>
-          <input type="number" name="dedos" min="0">
+          <label>2. ¿Cuantos dedos tienes?</label><br>
+          <input type="number" name="dedos" min="0" value="<?php echo (isset($_REQUEST['dedos'])?$_REQUEST['dedos']:''); ?>">
+          <p class="error"><?php echo($aErrores['dedos'])?></p>
         </p>
 
         <p>
-          <label>4. ¿Cuanto pesas? Incluyeme dos dígitos</label><br>
-          <input type="number" name="peso" min="0" step="0.01">
+          <label>3. ¿Cuanto pesas? Incluyeme dos dígitos</label><br>
+          <input type="number" name="peso" min="0" step="0.01" value="<?php echo (isset($_REQUEST['peso'])?$_REQUEST['peso']:''); ?>">
+          <p class="error"><?php echo($aErrores['peso'])?></p>
         </p>
 
         <p>
-          <label>5. ¿Cuál es tu color favorito?</label><br>
-          <select name="color" >
-            <option value="Rojo">Rojo</option>
-            <option value="Verde">Verde</option>
-            <option value="Azul">Azul</option>
-            <option value="Amarillo">Amarillo</option>
-          </select>
-        </p>
-
-        <p>
-          <label>6. Deja un comentario:</label><br>
+          <label>4. Deja un comentario:</label><br>
           <textarea name="comentario" rows="4" cols="40" disabled placeholder="Esto esta bloqueado "></textarea>
         </p>
 
@@ -85,13 +98,14 @@
           <input type="submit" name="enviar" value="Enviar respuestas">
           
         </p>
-    </form>';
-        
+    </form>
+        <?php
         }
-    ?>
+        ?>
+
     <footer>
         <p><a href="../indexProyectoTema3.php">Álvaro García González</a></p>
-        <p>Última actualización <time datetime="2025-10-17">17/10/2025</time></p>
+        <p>Última actualización <time datetime="2025-10-22">22/10/2025</time></p>
     </footer>
 </body>
 </html>

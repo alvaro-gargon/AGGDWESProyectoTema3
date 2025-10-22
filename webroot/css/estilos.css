@@ -51,8 +51,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
             color: red;
             text-decoration: none;
         }
+        
+        form{
+            margin-top: 15px;
+        }
         .obligatorio{
             background-color: lightgoldenrodyellow;
+        }
+        
+        .error{
+            color: red;
         }
         
         .principal {

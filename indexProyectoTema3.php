@@ -130,14 +130,14 @@
             <tr>
                 <td>19</td>
                 <td>Construir una librería de funciones de validación de campos de formularios (LibreríaValidacionFormularios.php) para utilizarla en los siguientes ejercicios. Discusión: diferencia entre librería de funciones y clase.</td>
-                <td><a href=""><img src="webroot/media/images/play.png" alt="boton_play"></a></td>
-                <td><a href=""><img src="webroot/media/images/code.webp" alt="boton_code"></a></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>20</td>
                 <td>Convertir la LibreriaValidacionFormularios.php en una clase ValidacionFormularios.php. El profesor facilitará a los alumnos la clase AAMMDDValidacionFormularios.php desarrollada en el curso anterior como punto de partida.</td>
-                <td><a href=""><img src="webroot/media/images/play.png" alt="boton_play"></a></td>
-                <td><a href=""><img src="webroot/media/images/code.webp" alt="boton_code"></a></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>21</td>
@@ -160,8 +160,8 @@
             <tr>
                 <td>24</td>
                 <td>Construir un formulario para recoger un cuestionario realizado a una persona y mostrar en la  misma página las preguntas y las respuestas recogidas; en el caso de que alguna respuesta esté vacía o errónea volverá a salir el formulario con el mensaje correspondiente, pero las respuestas que habíamos tecleado correctamente aparecerán en el formulario y no tendremos que volver a teclearlas.</td>
-                <td><a href=""><img src="webroot/media/images/play.png" alt="boton_play"></a></td>
-                <td><a href=""><img src="webroot/media/images/code.webp" alt="boton_code"></a></td>
+                <td><a href="codigoPHP/ejercicio24.php"><img src="webroot/images/play.png" alt="boton_play"></a></td>
+                <td><a href="mostrarcodigo/muestraEjercicio24.php"><img src="webroot/images/code.png" alt="boton_code"></a></td>
             </tr>
             <tr>
                 <td>25</td>
