@@ -73,6 +73,7 @@
                 $filas = 20;       
                 $columnas = 15;
                 //inicializo el array
+                //mejor empezar en 1 que en 0
                 for ($i = 0; $i < $filas; $i++) {
                     $asientosTeatro[$i] = [];
                     for ($j = 0; $j < $columnas; $j++) {
@@ -94,6 +95,7 @@
                     echo '<div class="fila">'; // Inicio de la fila
                     $fl=$i+1;
                     echo "<div class='nombreFila'>Fila {$fl}</div>";
+                    //hacerlo con un foreach
                     for ($j = 0; $j < $columnas; $j++) {
                         $fila = $i + 1;
                         $asiento = $j + 1;
