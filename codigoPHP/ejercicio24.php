@@ -31,8 +31,8 @@
                     ];
         $aRespuestas=
                 [
-                    'Comida,favorita' =>null,
-                    'Numero,de,dedos' =>null,
+                    'comida' =>null,
+                    'dedos' =>null,
                     'peso' =>null
                     ];
         //validacion de que comida es correcto y no esta vacio (a mano)
