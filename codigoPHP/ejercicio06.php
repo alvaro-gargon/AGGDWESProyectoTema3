@@ -19,7 +19,7 @@
         date_default_timezone_set("Europe/Madrid");
         $fecha_actual = new DateTime("now",new DateTimeZone('Europe/Madrid'));
         echo ("Fecha actual: ".$fecha_actual->format("N-m-Y H:i:s"));
-        echo("<br>Con modify + 7 days: ".$fecha_actual->add(new DateInterval('P60D'))->format("N-m-Y H:i:s"));
+        echo("<br>Con modify + 60 days: ".$fecha_actual->add(new DateInterval('P60D'))->format("N-m-Y H:i:s"));
         $fecha_actual->modify('+30 hours');
         echo ("<br>Y le sumamos otras 30 horas: ".$fecha_actual->format("N-m-Y H:i:s"));
     ?>
