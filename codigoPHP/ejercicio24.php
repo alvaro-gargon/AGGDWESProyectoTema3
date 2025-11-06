@@ -27,13 +27,15 @@
                 [
                     'comida' =>null,
                     'dedos' =>null,
-                    'peso' =>null
+                    'peso' =>null,
+                    'fecha' =>null
                     ];
         $aRespuestas=
                 [
                     'comida' =>null,
                     'dedos' =>null,
-                    'peso' =>null
+                    'peso' =>null,
+                    'fecha' =>null
                     ];
         //validacion de que comida es correcto y no esta vacio (a mano)
         /*if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
@@ -45,7 +47,8 @@
         if(isset($_REQUEST['enviar'])){
             $aErrores['comida']=validacionFormularios::comprobarAlfabetico($_REQUEST['comida'], obligatorio: 1);
             $aErrores['dedos']=validacionFormularios::comprobarEntero($_REQUEST['dedos'], obligatorio: 0);    
-            $aErrores['peso']=validacionFormularios::comprobarFloat($_REQUEST['peso'], obligatorio: 0);   
+            $aErrores['peso']=validacionFormularios::comprobarFloat($_REQUEST['peso'], obligatorio: 0);
+            $aErrores['fecha']=validacionFormularios::validarFecha($_REQUEST['fecha'], '01/01/2100','01/01/1900', 0);
             foreach ($aErrores as $clave => $valor){
                 if($valor!=null){
                     $entradaOK=false;
@@ -65,6 +68,7 @@
             echo ("<p>Comida favorita: ". $aRespuestas['comida']."</p>");
             echo ("<p>Numero de dedos: ". $aRespuestas['dedos']."</p>");
             echo ("<p>Peso: ". $aRespuestas['peso']."</p>");
+            echo ("<p>Fecha de nacimiento: ". $aRespuestas['fecha']."</p>");
             
             
             //forma incorrecta (con claves de array nombradas con comas)
@@ -104,9 +108,15 @@
               <input type="number" name="peso" min="0" step="0.01" value="<?php echo (isset($_REQUEST['peso'])?$_REQUEST['peso']:''); ?>">
               <p class="error"><?php echo($aErrores['peso'])?></p>
             </p>
+            
+            <p>
+              <label>4. Dime tu fecha de nacimiento</label><br>
+              <input type="date" name="fecha"  value="<?php echo (isset($_REQUEST['fecha'])?$_REQUEST['fecha']:''); ?>">
+              <p class="error"><?php echo($aErrores['fecha'])?></p>
+            </p>
 
             <p>
-              <label>4. Deja un comentario:</label><br>
+              <label>5. Deja un comentario:</label><br>
               <textarea name="comentario" rows="4" cols="40" disabled placeholder="Esto esta bloqueado "></textarea>
             </p>
 

@@ -69,12 +69,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
         .saltar{
             display: block;
             margin: 10px,10px;
-            text-align: center;
-            
+            text-align: center;       
         }
         
         .error{
             color: red;
+        }
+        
+        .globales{
+            display: flex;
+            justify-content: center;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .globales td{
+            border: 1px solid #3a3a3a;
         }
         
         .principal {
