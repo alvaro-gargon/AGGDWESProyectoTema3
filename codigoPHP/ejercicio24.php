@@ -39,10 +39,6 @@
                     'pais' =>null,
                     'fecha' =>null
                     ];
-        //validacion de que comida es correcto y no esta vacio (a mano)
-        /*if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
-            $entradaOK=false;
-        }*/
         
         //Valido cada campo del formulario. Recojo los errores o las respuestas si es correcto
         //Si algun valor es null, el formulario no se recogera y se volvera a mostrar
@@ -58,34 +54,27 @@
                 }else{
                     if(empty($_REQUEST["$clave"])){
                         $aRespuestas[$clave]='No se ha rellenado';
-                    }else{
-                        $aRespuestas[$clave]=$_REQUEST["$clave"];
                     }
                 }
             }
+        }else{
+            $entradaOK=false;
         }
         
-        if(isset($_REQUEST['enviar']) && $entradaOK==true){
+        if($entradaOK==true){
             //codigo que se ejecuta cuando envias el formulario
-            
+            //rellenamos el array de respuestas
+            $aRespuestas['comida']=$_REQUEST['comida'];
+            $aRespuestas['dedos']=$_REQUEST['dedos'];
+            $aRespuestas['peso']=$_REQUEST['peso'];
+            $aRespuestas['fecha']=$_REQUEST['fecha'];
+            $aRespuestas['pais']=$_REQUEST['pais'];
             echo ("<p>Comida favorita: ". $aRespuestas['comida']."</p>");
             echo ("<p>Numero de dedos: ". $aRespuestas['dedos']."</p>");
             echo ("<p>Peso: ". $aRespuestas['peso']."</p>");
             echo ("<p>Fecha de nacimiento: ". $aRespuestas['fecha']."</p>");
             echo ("<p>Pais: ". $aRespuestas['pais']."</p>");
             
-            
-            
-            //forma incorrecta (con claves de array nombradas con comas)
-            /*foreach ($aRespuestas as $clave =>$valor){
-                $aPalabras= explode(',', $clave);
-                echo ('<p class="saltar">');
-                foreach ($aPalabras as $palabra) {
-                    echo ($palabra.' ');
-                }
-                echo(': '.$valor);
-                echo ('</p>');
-            }*/
         }else{
             //codigo que se ejecuta antes de enviar el formulario
             ?>
