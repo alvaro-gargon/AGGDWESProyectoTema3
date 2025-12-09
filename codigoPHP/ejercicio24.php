@@ -28,6 +28,7 @@
                     'comida' =>null,
                     'dedos' =>null,
                     'peso' =>null,
+                    'pais' =>null,
                     'fecha' =>null
                     ];
         $aRespuestas=
@@ -35,12 +36,9 @@
                     'comida' =>null,
                     'dedos' =>null,
                     'peso' =>null,
+                    'pais' =>null,
                     'fecha' =>null
                     ];
-        //validacion de que comida es correcto y no esta vacio (a mano)
-        /*if(empty($_REQUEST['comida']) || is_numeric($_REQUEST['comida'])){
-            $entradaOK=false;
-        }*/
         
         //Valido cada campo del formulario. Recojo los errores o las respuestas si es correcto
         //Si algun valor es null, el formulario no se recogera y se volvera a mostrar
@@ -49,38 +47,34 @@
             $aErrores['dedos']=validacionFormularios::comprobarEntero($_REQUEST['dedos'], obligatorio: 0);    
             $aErrores['peso']=validacionFormularios::comprobarFloat($_REQUEST['peso'], obligatorio: 0);
             $aErrores['fecha']=validacionFormularios::validarFecha($_REQUEST['fecha'], '01/01/2100','01/01/1900', 0);
+            $aErrores['pais']= validacionFormularios::comprobarAlfabetico($_REQUEST['pais'], 3, 3, 1);
             foreach ($aErrores as $clave => $valor){
                 if($valor!=null){
                     $entradaOK=false;
                 }else{
                     if(empty($_REQUEST["$clave"])){
                         $aRespuestas[$clave]='No se ha rellenado';
-                    }else{
-                        $aRespuestas[$clave]=$_REQUEST["$clave"];
                     }
                 }
             }
+        }else{
+            $entradaOK=false;
         }
         
-        if(isset($_REQUEST['enviar']) && $entradaOK==true){
+        if($entradaOK==true){
             //codigo que se ejecuta cuando envias el formulario
-            
+            //rellenamos el array de respuestas
+            $aRespuestas['comida']=$_REQUEST['comida'];
+            $aRespuestas['dedos']=$_REQUEST['dedos'];
+            $aRespuestas['peso']=$_REQUEST['peso'];
+            $aRespuestas['fecha']=$_REQUEST['fecha'];
+            $aRespuestas['pais']=$_REQUEST['pais'];
             echo ("<p>Comida favorita: ". $aRespuestas['comida']."</p>");
             echo ("<p>Numero de dedos: ". $aRespuestas['dedos']."</p>");
             echo ("<p>Peso: ". $aRespuestas['peso']."</p>");
             echo ("<p>Fecha de nacimiento: ". $aRespuestas['fecha']."</p>");
+            echo ("<p>Pais: ". $aRespuestas['pais']."</p>");
             
-            
-            //forma incorrecta (con claves de array nombradas con comas)
-            /*foreach ($aRespuestas as $clave =>$valor){
-                $aPalabras= explode(',', $clave);
-                echo ('<p class="saltar">');
-                foreach ($aPalabras as $palabra) {
-                    echo ($palabra.' ');
-                }
-                echo(': '.$valor);
-                echo ('</p>');
-            }*/
         }else{
             //codigo que se ejecuta antes de enviar el formulario
             ?>
@@ -114,9 +108,16 @@
               <input type="date" name="fecha"  value="<?php echo (isset($_REQUEST['fecha'])?$_REQUEST['fecha']:''); ?>">
               <p class="error"><?php echo($aErrores['fecha'])?></p>
             </p>
+            
+            <p>
+              <label>5. Dime pais de nacimineto (solo las tres primeras letras)</label><br>
+              <input class="obligatorio" type="text" name="pais"  value="<?php echo (isset($_REQUEST['pais'])?$_REQUEST['pais']:''); ?>"
+                     placeholder="ESP">
+              <p class="error"><?php echo($aErrores['pais'])?></p>
+            </p>
 
             <p>
-              <label>5. Deja un comentario:</label><br>
+              <label>6. Deja un comentario:</label><br>
               <textarea name="comentario" rows="4" cols="40" disabled placeholder="Esto esta bloqueado "></textarea>
             </p>
 
